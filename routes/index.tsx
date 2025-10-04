@@ -15,7 +15,8 @@ interface Home {
 
 export const handler: Handlers<Home> = {
   async GET(req, ctx) {
-    const id = (Math.floor(Math.random() * 999)) + 1;
+    const count = await (await fetch("https://pokeapi.co/api/v2/pokemon")).json();
+    const id = (Math.floor(Math.random() * count.count)) + 1;
 
     const url = `https://pokeapi.co/api/v2/pokemon-form/${id}/`;
 
