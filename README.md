@@ -3,7 +3,6 @@
 **Second project while learning [Deno Fresh](https://deno.land/x/fresh) (Deno version 1.25.0)**  
 Focused on learning API requests and dynamic routes.
 
-
 Live project: [pokedex.marouse.fr](https://pokedex.marouse.fr)
 
 ---
@@ -27,3 +26,9 @@ deno task start
 ```
 
 This will watch the project directory and restart as necessary.
+
+---
+
+### Home Page with a random Pokémon
+
+![alt text](image.png)
