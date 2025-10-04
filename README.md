@@ -19,6 +19,8 @@ Live project: [pokedex.marouse.fr](https://pokedex.marouse.fr)
 
 ### Usage
 
+Make sure to install Deno: https://deno.land/manual/getting_started/installation
+
 Start the project:
 
 ```
