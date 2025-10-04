@@ -1,3 +1,6 @@
 *.yml
 Dockerfile
 .env
+deno.lock
+.gitignore
+.gitattributes
