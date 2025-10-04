@@ -1,12 +1,12 @@
 import { useEffect, useState } from "preact/hooks";
 
 export default function Pokeliste(props: any) {
-  const [abilitiesList, setAbilitiesList] = useState<Abilities[]>([]);
+  const [pokeList, setPokeList] = useState<Pokemon[]>([]);
   const [value, setValue] = useState("");
 
   useEffect(() => {
     fetch(props.url).then((res) => res.json()).then((data) => {
-      setAbilitiesList([...abilitiesList, ...data.results]);
+      setPokeList([...pokeList, ...data.results]);
     }).catch((err) => {
       console.log(err);
     });
@@ -30,9 +30,9 @@ export default function Pokeliste(props: any) {
       >
       </input>
       <div class="items-center justify-center max-w-screen-lg mx-auto text-center flex flex-wrap">
-        {abilitiesList.filter((ability) => ability.name.includes(value)).map(
-          (ability: Abilities) => {
-            const url_array = ability.url.split("/");
+        {pokeList.filter((pokemon) => pokemon.name.includes(value)).map(
+          (pokemon: Pokemon) => {
+            const url_array = pokemon.url.split("/");
             const num = url_array[url_array.length - 2];
             return (
               <a
@@ -40,7 +40,7 @@ export default function Pokeliste(props: any) {
                 style={`background-image:linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.8)), url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${num}.png');`}
                 href={`/pokemon/${num}`}
               >
-                <p>{ability.name.charAt(0).toUpperCase() + ability.name.slice(1)}</p>
+                <p>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</p>
               </a>
             );
           },
@@ -50,7 +50,7 @@ export default function Pokeliste(props: any) {
   );
 }
 
-interface Abilities {
+interface Pokemon {
   name: string;
   url: string;
 }

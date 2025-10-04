@@ -3,6 +3,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import Header from "../components/Header.tsx";
 import Hero from "../islands/Hero.tsx";
 import Footer from "../components/Footer.tsx";
+import { useEffect, useState } from "preact/hooks";
 
 // https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1281
 // https://pokeapi.co/api/v2/pokemon/1/
@@ -12,24 +13,32 @@ interface Home {
   name: string;
   types: any;
 }
+interface Pokemon {
+  name: string;
+  url: string;
+}
 
 export const handler: Handlers<Home> = {
   async GET(req, ctx) {
-    const count = await (await fetch("https://pokeapi.co/api/v2/pokemon")).json();
-    const id = (Math.floor(Math.random() * count.count)) + 1;
+      while( true ) {
+        const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=-1");
+        const data = await res.json();
+        const poke = data.results[Math.floor((Math.random()*data.count-1)+1)]
+        console.log(poke)
+        const url = poke.url
+        const resp=await fetch(url)
+        const pokemon = await resp.json();
 
-    const url = `https://pokeapi.co/api/v2/pokemon-form/${id}/`;
+        const sprites = pokemon.sprites;
 
-    const resp = await fetch(url);
-    const pokemon = await resp.json();
-
-    const sprites = pokemon.sprites;
-
-    return ctx.render({
-      url: sprites.front_default,
-      name: pokemon.name,
-      types: pokemon.types,
-    });
+        if(pokemon?.types && pokemon?.name && sprites?.front_default){
+          return ctx.render({
+            url: sprites.front_default,
+            name: pokemon.name,
+            types: pokemon.types,
+          });
+        }
+    }
   },
 };
 

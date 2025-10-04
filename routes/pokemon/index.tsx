@@ -20,7 +20,7 @@ export default function Pokemon(props: any) {
 
 export const handler: Handlers = {
   async GET(req, ctx) {
-    const url_start = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1281";
+    const url_start = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=-1";
     return ctx.render(url_start);
   },
 };
