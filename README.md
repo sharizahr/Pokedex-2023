@@ -1,4 +1,4 @@
-# Pokédex - Deno Fresh Project
+# Pokédex - Deno Fresh Project (made in 2023)
 
 **Second project while learning [Deno Fresh](https://deno.land/x/fresh) (Deno version 1.25.0)**  
 Focused on learning API requests and dynamic routes.
